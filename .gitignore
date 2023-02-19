@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# My ignore
+.idea
+HELP.md
+.mvn
+mvnw
+mvnw.cmd
