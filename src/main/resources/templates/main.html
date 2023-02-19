@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+
+<div>
+    <form th:method="post" th:action="@{/add}" th:object="${addMessage}">
+        <input type="text" th:field="*{text}" id="text" placeholder="Введите сообщение">
+        <input type="text" th:field="*{tag}" placeholder="Введите тег">
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+<div th:each="message : ${messages}">
+    <p th:text="|${message.id} ${message.text} ${message.tag}|"/>
+</div>
+</body>
+</html>
