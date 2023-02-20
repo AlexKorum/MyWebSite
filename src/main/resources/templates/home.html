@@ -2,11 +2,34 @@
 <html>
 <head>
     <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--    Подключение-->
+    <meta th:replace="pattern::meta"/>
+    <link th:replace="pattern::link"/>
 </head>
-<dev>
-    Hello, user!
-</dev>
-<a href="/main">Main page</a>
+<body>
+<div class="container align-center">
+    <h1 class="display-1">Books</h1>
+    <h1 class="display-4">Сервис отзовик на современные произведения</h1>
+    <p class="lead">Сайт отзовик на соременные произведения авторов. Правда в том, что боль сама по себе важна, за ней
+        следует воспитание ученика, но бывает в такое время, что есть какая-то большая боль и труд. рода труда, если
+        только он не извлечет из него какой-либо пользы.Dous или irrure боль в удовольствии порицает, что он хочет быть
+        ресницей от боли, пусть он бежит от нее, и никто не родит.Если они не ослеплены желанием, они делают не выйдет,
+        виноваты те, которые оставляют свои обязанности, душа смягчается, то есть трудится</p>
+    <div class="btn-group container">
+        <div class="col">
+            <div class="row w-25 p-3">
+                <a class="btn btn-primary btn-block" href="/books">Войти</a>
+            </div>
+            <div class="row w-25 p-3">
+                <a class="btn btn-primary btn-block" href="/registration">Зарегистрироваться</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    Скрипты-->
+<div th:replace="pattern::script"/>
+
 </body>
 </html>

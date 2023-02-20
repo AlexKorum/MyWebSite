@@ -19,24 +19,24 @@ public class MainController {
         return "/home";
     }
 
-    @GetMapping("/main")
+    @GetMapping("/books")
     public String main(Model model) {
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("addMessage", new Message());
         model.addAttribute("messages", messages);
-        return "main";
+        return "books";
     }
 
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("addMessage", new Message());
-        return "/main";
+        return "books";
     }
 
     @PostMapping("/add")
     public String add(@ModelAttribute("addMessage") Message message, Model model) {
         messageRepo.save(message);
-        return "redirect:/main";
+        return "redirect:/books";
     }
 
 }
