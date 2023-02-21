@@ -25,19 +25,17 @@
                     </div>
 
                     <div class="input-group mt-3">
-                        <div class="lead mr-2">Автор: </div>
-                        <select class="custom-select">
-                            <option selected>Любой</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <div class="lead mr-2">Автор:</div>
+                        <select class="custom-select" id="author_selected" name="author_selected">
+                            <option th:each="author : ${authorsList}" th:value="${author.getId()}"
+                                    th:text="${author.getAuthorName()}" th:selected="${author.getId()==0}"/>
                         </select>
                     </div>
                     <div class="input-group mt-3">
-                        <div class="lead mr-2">Жанр: </div>
-                        <select class="custom-select">
-                            <option selected>Любой</option>
-                            <option th:each="i : ${#numbers.sequence(0, 100)}" th:value="${i}" th:text="${i}"/>
+                        <div class="lead mr-2">Жанр:</div>
+                        <select class="custom-select" id="genre_selected" name="genre_selected">
+                            <option th:each="genre : ${genresList}" th:value="${genre.getId()}"
+                                    th:text="${genre.getGenreName()}" th:selected="${genre.getId()==0}"/>
                         </select>
                     </div>
                 </form>
@@ -45,7 +43,8 @@
             <div class="col-sm">
                 <div class="row">
                     <div class="col-sm">
-                        <label class="lead badge" th:text="|Login: ${username}|"/>
+                        <label class="lead badge" th:text="|Login: ${user.getUsername()}|"></label>
+                        <a href="/admin" th:each="role : ${user.getRoles()}" th:text="${role}" th:if="${role == role.ADMIN}" class="lead badge"/>
                     </div>
                     <div class="col-sm">
                         <form th:action="@{/logout}" method="post">
