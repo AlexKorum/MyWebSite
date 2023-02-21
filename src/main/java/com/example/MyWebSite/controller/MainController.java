@@ -1,42 +1,17 @@
 package com.example.MyWebSite.controller;
 
-import com.example.MyWebSite.domain.Message;
-import com.example.MyWebSite.repos.MessageRepo;
+import com.example.MyWebSite.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MainController {
-    @Autowired
-    private MessageRepo messageRepo;
 
     @GetMapping("/")
     public String gretting(Model model) {
         return "/home";
     }
-
-    @GetMapping("/books")
-    public String main(Model model) {
-        Iterable<Message> messages = messageRepo.findAll();
-        model.addAttribute("addMessage", new Message());
-        model.addAttribute("messages", messages);
-        return "books";
-    }
-
-    @GetMapping("/add")
-    public String add(Model model) {
-        model.addAttribute("addMessage", new Message());
-        return "books";
-    }
-
-    @PostMapping("/add")
-    public String add(@ModelAttribute("addMessage") Message message, Model model) {
-        messageRepo.save(message);
-        return "redirect:/books";
-    }
-
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!--    Подключение-->
+    <meta th:replace="pattern::meta"/>
+    <link th:replace="pattern::link"/>
+</head>
+<body class="text-center">
+
+<div class="container">
+    <p th:text = "${book.name}"/>
+    <p th:text = "${author}"/>
+</div>
+
+<!--    Скрипты-->
+<div th:replace="pattern::script"/>
+</body>
+</html>

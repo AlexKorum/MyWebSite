@@ -4,22 +4,79 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!--    Подключение-->
+    <meta th:replace="pattern::meta"/>
+    <link th:replace="pattern::link"/>
 </head>
-<div>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
+<body class="text-center">
+
+<header class="d-flex justify-content-center py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <form th:action="@{/books}" method="get" class="input-group">
+                    <div class="form-outline">
+                        <input type="text" name="search_text" id="form1" class="form-control"
+                               placeholder="Название книги..."/>
+                    </div>
+                    <div>
+                        <input type="submit" value="Найти" class="btn btn-primary fas fa-search"/>
+                    </div>
+
+                    <div class="input-group mt-3">
+                        <div class="lead mr-2">Автор: </div>
+                        <select class="custom-select">
+                            <option selected>Любой</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="input-group mt-3">
+                        <div class="lead mr-2">Жанр: </div>
+                        <select class="custom-select">
+                            <option selected>Любой</option>
+                            <option th:each="i : ${#numbers.sequence(0, 100)}" th:value="${i}" th:text="${i}"/>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm">
+                <div class="row">
+                    <div class="col-sm">
+                        <label class="lead badge" th:text="|Login: ${username}|"/>
+                    </div>
+                    <div class="col-sm">
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" value="Sign Out" class="btn btn-sm btn-primary btn-block"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div th:if="${books.isEmpty()}">
+    <h1 class="h3 mb-3 font-weight-normal">Ничего не найдено</h1>
+</div>
+<div class="container">
+    <div th:each="book:${books}">
+        <div class="card text-left mt-1">
+            <div class="card-body">
+                <a th:href="@{'/books/'+${book.id}}" th:text="${book.name}" class="card-title h4"/>
+                <p th:if="${book.description.length() > 100}" class="card-text"
+                   th:text="${book.description.substring(0, 100)} + '...'"/>
+                <p th:unless="${book.description.length() > 100}" class="card-text" th:text="${book.description}"/>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>
-    <form th:method="post" th:action="@{/add}" th:object="${addMessage}">
-        <input type="text" th:field="*{text}" id="text" placeholder="Введите сообщение">
-        <input type="text" th:field="*{tag}" placeholder="Введите тег">
-        <button type="submit">Добавить</button>
-    </form>
-</div>
-<div th:each="message : ${messages}">
-    <p th:text="|${message.id} ${message.text} ${message.tag}|"/>
-</div>
+
+<!--    Скрипты-->
+<div th:replace="pattern::script"/>
+
 </body>
 </html>
