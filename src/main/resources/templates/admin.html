@@ -9,8 +9,81 @@
     <link th:replace="pattern::link"/>
 </head>
 <body>
+<div class="container">
+    <a href="/books">Back</a>
+</div>
+<div class="container">
+    <div class="card text-left mt-2">
+        <div class="card-body">
+            <label class="card-title h4">Добавить автора</label>
+            <form th:action="@{/admin/addAuthor}" method="post">
+                <div class="container">
+                    <div class="row">
+                        <div class="lead col-3">Введите имя автора:</div>
+                        <input class="col-sm form-control pr-3" type="text" name="author_name" id="form1"
+                               placeholder="Имя автора..."/>
+                    </div>
 
+                    <div class="row"><label><input type="submit" value="Сохранить"
+                                                   class="btn btn-lg btn-primary btn-block  mt-3"/></label></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card text-left mt-2">
+        <div class="card-body">
+            <label class="card-title h4">Добавить жанр</label>
+            <form th:action="@{/admin/addGenre}" method="post">
+                <div class="container">
+                    <div class="row">
+                        <div class="lead col-3">Введите название жанра:</div>
+                        <input class="col-sm form-control pr-3" type="text" name="genre_name" id="form2"
+                               placeholder="Название жанра..."/>
+                    </div>
 
+                    <div class="row"><label><input type="submit" value="Сохранить"
+                                                   class="btn btn-lg btn-primary btn-block mt-3"/></label></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card text-left mt-2">
+        <div class="card-body">
+            <label class="card-title h4">Добавить произведение</label>
+            <form th:action="@{/admin/addBook}" method="post">
+                <div class="container">
+                    <div class="row mt-3">
+                        <div class="lead col-3">Введите название произведения:</div>
+                        <input class="col-sm form-control pr-3" type="text" name="book_name" id="form3"
+                               placeholder="Название произведения..."/>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="lead col-3">Введите описание произведения:</div>
+                        <textarea class="col-sm form-control pr-3" type="tex" name="book_description" id="form4"
+                                  placeholder="Описание произведения произведения..."></textarea>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="lead col-3">Автор:</div>
+                        <select class="custom-select col-sm" id="author_selected" name="author_selected">
+                            <option th:each="author : ${authorsList}" th:value="${author.getId()}"
+                                    th:text="${author.getAuthorName()}" th:if="${author.getId() !=0}"/>
+                        </select>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="lead col-3 mt-2">Жанр:</div>
+                        <select class="custom-select col-sm" id="genre_selected" name="genre_selected">
+                            <option th:each="genre : ${genresList}" th:value="${genre.getId()}"
+                                    th:text="${genre.getGenreName()}" th:if="${genre.getId()!=0}"/>
+                        </select>
+                    </div>
+
+                    <div class="row mt-2"><label><input type="submit" value="Сохранить"
+                                                   class="btn btn-lg btn-primary btn-block mt-3"/></label></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!--    Скрипты-->
 <div th:replace="pattern::script"/>
